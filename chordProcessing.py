@@ -46,7 +46,7 @@ def buildChordTemplates():
     # Return Results.
     return chordNames, chordTemplates
 
-def printResults():
+def printTemplates():
     names, templates = buildChordTemplates()
     
     print("Chord Templates\n")
@@ -62,3 +62,15 @@ def printResults():
         binary = (template > 0.1).astype(int)
         binaryString = ''.join(str(b) for b in binary)
         print(f"{chordNames}: [{binaryString}]  -  {' + '.join(chordNotes)}")
+
+def normalizeChord(chord: str) -> str:
+    chord = chord.strip()
+
+    # Remove Bass Notes
+    if "/" in chord:
+        chord = chord.split("/")[0]
+
+    # Remove Colons 
+    chord = chord.replace(":", "")
+
+    return chord

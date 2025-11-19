@@ -1,7 +1,7 @@
 import numpy as np
 import librosa
 import argparse
-import chordTemplates as ct
+import chordProcessing as ct
 from scipy.ndimage import median_filter
 
 chordNames = []
