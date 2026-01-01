@@ -1,4 +1,5 @@
 import numpy as np
+import librosa
 
 roots = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
@@ -46,31 +47,43 @@ def buildChordTemplates():
     # Return Results.
     return chordNames, chordTemplates
 
-def printTemplates():
-    names, templates = buildChordTemplates()
+def detectChords(chromagram, chordNames, chordTemplates, hopLength=512, sr=22050):
+    frameCount = chromagram.shape[1]
     
-    print("Chord Templates\n")
+    # Compute similarity between each frame and all templates
+    # Using cosine similarity (dot product of normalized vectors)
+    similarities = np.dot(chordTemplates, chromagram)
     
-    for chordNames in names:
-        idx = names.index(chordNames)
-        template = templates[idx]
-        # Find which notes are active (threshold for normalized values)
-        notes = [i for i in range(12) if template[i] > 0.1]
-        chordNotes = [roots[n] for n in notes]
+    # Get best matching chord for each frame
+    bestChords = np.argmax(similarities, axis=0)
+    
+    # Convert frame indices to time
+    frameTimes = librosa.frames_to_time(np.arange(frameCount), sr=sr, hop_length=hopLength)
+    
+    # Group consecutive same chords
+    chords = []
+    currentChord = bestChords[0]
+    startTime = 0
+    
+    for i in range(1, frameCount):
+        if bestChords[i] != currentChord:
+            # Chord changed
+            endTime = frameTimes[i]
             
-        # Show binary pattern and note names
-        binary = (template > 0.1).astype(int)
-        binaryString = ''.join(str(b) for b in binary)
-        print(f"{chordNames}: [{binaryString}]  -  {' + '.join(chordNotes)}")
-
-def normalizeChord(chord: str) -> str:
-    chord = chord.strip()
-
-    # Remove Bass Notes
-    if "/" in chord:
-        chord = chord.split("/")[0]
-
-    # Remove Colons 
-    chord = chord.replace(":", "")
-
-    return chord
+            # Only add chords that last at least 0.1 seconds
+            if endTime - startTime >= 0.1:
+                chords.append({
+                    "chord": chordNames[currentChord],
+                    "start": float(startTime),
+                    "end": float(endTime),
+                })            
+            currentChord = bestChords[i]
+            startTime = endTime
+    
+    # Add last chord
+    chords.append({
+        "chord": chordNames[currentChord],
+        "start": float(startTime),
+        "end": float(frameTimes[-1]),
+    })
+    return chords
