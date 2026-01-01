@@ -2,7 +2,7 @@ import time, json
 import librosa
 import argparse
 import numpy as np
-import chordProcessing 
+import chordProcessing
 
 def ShortTimeFourierTransfomrm(y, sr, fftWindowSize=4096, hopLength=512):
     # Define Window as Hann function. 
