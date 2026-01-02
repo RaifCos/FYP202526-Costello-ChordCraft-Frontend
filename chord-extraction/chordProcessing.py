@@ -6,17 +6,17 @@ roots = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 def buildChordTemplates():
     rootsLen = len(roots)
     chordTypes = {
-        "": [0, 4, 7],              # Major triad
-        "m": [0, 3, 7],             # Minor triad
-        "dim": [0, 3, 6],           # Diminished triad
-        "aug": [0, 4, 8],           # Augmented triad
-        "7": [0, 4, 7, 10],         # Dominant 7th
-        "maj7": [0, 4, 7, 11],      # Major 7th
-        "m7": [0, 3, 7, 10],        # Minor 7th
-        "dim7": [0, 3, 6, 9],       # Diminished 7th
-        "m7b5": [0, 3, 6, 10],      # Half-diminished 7th
-        "sus2": [0, 2, 7],          # Suspended 2nd
-        "sus4": [0, 5, 7],          # Suspended 4th
+        ":maj": [0, 4, 7],           # Major triad
+        ":min": [0, 3, 7],           # Minor triad
+        ":dim": [0, 3, 6],           # Diminished triad
+        ":aug": [0, 4, 8],           # Augmented triad
+        ":7": [0, 4, 7, 10],         # Dominant 7th
+        ":maj7": [0, 4, 7, 11],      # Major 7th
+        ":m7": [0, 3, 7, 10],        # Minor 7th
+        ":dim7": [0, 3, 6, 9],       # Diminished 7th
+        ":m7b5": [0, 3, 6, 10],      # Half-diminished 7th
+        ":sus2": [0, 2, 7],          # Suspended 2nd
+        ":sus4": [0, 5, 7],          # Suspended 4th
     }
     
     chordNames = []
