@@ -21,19 +21,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChordCraftTheme { Structure() }
+            ChordCraftTheme { MainStructure() }
         }
     }
 }
 
 @Composable
-fun Structure() {
+fun MainStructure() {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         val currContext = LocalContext.current
-        GreetingText(
+        Opening(
             "Welcome to ChordCraft",
             "chord extraction made easy.",
             onStartClick = { moveMenu(currContext) },
@@ -44,7 +44,7 @@ fun Structure() {
 }
 
 @Composable
-fun GreetingText(
+fun Opening(
     txtA: String,
     txtB: String,
     onStartClick: () -> Unit,
@@ -85,8 +85,8 @@ fun GreetingText(
     showSystemUi = true
 )
 @Composable
-fun ChordCraftPreview() {
-    Structure()
+fun MainPreview() {
+    MainStructure()
 }
 
 fun moveMenu(context: Context) {
