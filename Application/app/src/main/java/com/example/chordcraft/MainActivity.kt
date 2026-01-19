@@ -33,9 +33,11 @@ fun Structure() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+            val currContext = LocalContext.current
             GreetingText(
                 "Welcome to ChordCraft",
                 "chord extraction made easy.",
+                onStartClick = { moveMenu(currContext) },
                 modifier = Modifier
                     .padding(32.dp)
             )
@@ -44,7 +46,12 @@ fun Structure() {
 }
 
 @Composable
-fun GreetingText(txtA: String, txtB: String, modifier: Modifier = Modifier) {
+fun GreetingText(
+    txtA: String,
+    txtB: String,
+    onStartClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,11 +67,10 @@ fun GreetingText(txtA: String, txtB: String, modifier: Modifier = Modifier) {
             text = txtB,
             fontSize = 16.sp,
         )
-        val currContext = LocalContext.current
         Button(
-            onClick = { moveMenu(currContext) },
+            onClick = { onStartClick },
             shape = RoundedCornerShape(16.dp),
-            modifier = modifier
+            modifier = Modifier
                 .padding(32.dp)
                 .width(256.dp)
                 .height(64.dp)
