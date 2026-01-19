@@ -59,13 +59,12 @@ fun GreetingText(
     ) {
         Text(
             text = txtA,
-            fontSize = 48.sp,
-            lineHeight = 64.sp,
+            style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center
         )
         Text(
             text = txtB,
-            fontSize = 16.sp,
+            style = MaterialTheme.typography.bodyMedium
         )
         Button(
             onClick = { onStartClick },
@@ -77,7 +76,7 @@ fun GreetingText(
         ) {
             Text(
                 text = "Start",
-                fontSize = 32.sp
+                style = MaterialTheme.typography.headlineLarge
             )
         }
     }
