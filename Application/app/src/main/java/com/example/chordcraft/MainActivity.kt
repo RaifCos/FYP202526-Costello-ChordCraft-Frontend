@@ -70,7 +70,7 @@ fun GreetingText(txtA: String, txtB: String, modifier: Modifier = Modifier) {
                 .height(64.dp)
         ) {
             Text(
-                text = "Continue",
+                text = "Start",
                 fontSize = 32.sp
             )
         }
