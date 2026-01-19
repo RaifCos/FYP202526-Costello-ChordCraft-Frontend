@@ -9,12 +9,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.chordcraft.ui.theme.ChordCraftTheme
+
+private val ScreenPadding = 32.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,7 @@ fun Structure() {
             "chord extraction made easy.",
             onStartClick = { moveMenu(currContext) },
             modifier = Modifier
-                .padding(32.dp)
+                .padding(ScreenPadding)
         )
     }
 }
@@ -67,7 +68,7 @@ fun GreetingText(
             onClick = { onStartClick },
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .padding(32.dp)
+                .padding(ScreenPadding)
                 .width(256.dp)
                 .height(64.dp)
         ) {
