@@ -9,18 +9,16 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun FilePickerLauncher(selectedFileUri: MutableState<Uri?>): () -> Unit {
+fun filePickerLauncher(selectedFileUri: MutableState<Uri?>): () -> Unit {
     val context = LocalContext.current
-
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ) { uri: Uri? ->
+    ) {
+        uri: Uri? ->
         if (uri != null) {
             selectedFileUri.value = uri
             Toast.makeText(context, "File selected: $uri", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    // Return a lambda that can be called from Button
+    } // Return a lambda callable from the MainMenu Activity. 
     return { launcher.launch("audio/*") }
 }
