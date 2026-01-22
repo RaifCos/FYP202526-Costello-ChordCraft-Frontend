@@ -103,9 +103,14 @@ fun UploadChord(
         modifier = modifier.fillMaxSize()
     ) {
         Button(onClick = launchFilePickerCall) {
-            Text("Upload Audio (MP3/WAV)")
+            Text(text = "Upload Audio")
         }
 
+        Text(
+            text = ".MP3 or .WAV",
+            style = MaterialTheme.typography.bodySmall
+        )
+        
         selectedFileUri.value?.let { uri ->
             Text(
                 text = "Selected: ${getFileName(uri)}",

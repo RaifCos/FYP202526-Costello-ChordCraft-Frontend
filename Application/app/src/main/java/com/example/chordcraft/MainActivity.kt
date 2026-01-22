@@ -44,8 +44,8 @@ fun MainStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
         Opening(
-            "Welcome to ChordCraft",
-            "chord extraction made easy.",
+            "Welcome to ChordCraft!",
+            "Chord extraction made easy.",
             onStartClick = { moveMenu(currContext) },
             modifier = Modifier
                 .padding(ScreenPadding)
