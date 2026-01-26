@@ -1,5 +1,5 @@
-from mir.io.feature_io_base import *
-from mir.common import PACKAGE_PATH
+from chord_cnn_lstm.mir.io.feature_io_base import *
+from chord_cnn_lstm.mir.common import PACKAGE_PATH
 
 class BeatLabIO(FeatureIO):
     def read(self, filename, entry):

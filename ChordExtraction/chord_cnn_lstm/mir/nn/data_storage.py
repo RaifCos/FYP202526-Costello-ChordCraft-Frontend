@@ -1,5 +1,5 @@
 from abc import ABC,abstractmethod
-from mir.common import DEFAULT_DATA_STORAGE_PATH
+from chord_cnn_lstm.mir.common import DEFAULT_DATA_STORAGE_PATH
 import h5py
 import os
 import numpy as np

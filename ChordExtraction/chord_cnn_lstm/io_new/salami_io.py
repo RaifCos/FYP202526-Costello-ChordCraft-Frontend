@@ -1,5 +1,5 @@
-from mir.io.feature_io_base import *
-from mir.music_base import get_scale_and_suffix
+from chord_cnn_lstm.mir.io.feature_io_base import *
+from chord_cnn_lstm.mir.music_base import get_scale_and_suffix
 
 class SalamiIO(FeatureIO):
     def read(self, filename, entry):

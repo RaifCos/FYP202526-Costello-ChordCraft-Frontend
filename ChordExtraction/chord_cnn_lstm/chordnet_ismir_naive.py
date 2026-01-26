@@ -1,9 +1,9 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from mir.nn.train import NetworkBehavior,NetworkInterface
-from mir.nn.data_storage import FramedRAMDataStorage,FramedH5DataStorage
-from mir.nn.data_decorator import CQTPitchShifter,AbstractPitchShifter,NoPitchShifter
-from mir.nn.data_provider import FramedDataProvider
+from chord_cnn_lstm.mir.nn.train import NetworkBehavior,NetworkInterface
+from chord_cnn_lstm.mir.nn.data_storage import FramedRAMDataStorage,FramedH5DataStorage
+from chord_cnn_lstm.mir.nn.data_decorator import CQTPitchShifter,AbstractPitchShifter,NoPitchShifter
+from chord_cnn_lstm.mir.nn.data_provider import FramedDataProvider
 import torch
 import numpy as np
 from complex_chord import Chord,ChordTypeLimit,shift_complex_chord_array_list,complex_chord_chop,enum_to_dict,\

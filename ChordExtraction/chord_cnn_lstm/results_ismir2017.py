@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from mir.music_base import get_scale_and_suffix
+from chord_cnn_lstm.mir.music_base import get_scale_and_suffix
 from settings import DEFAULT_SR,DEFAULT_HOP_LENGTH,JAM_DATASET_PATH
 import sklearn.metrics as skm
 import mir_eval.chord

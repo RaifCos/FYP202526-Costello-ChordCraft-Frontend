@@ -1,5 +1,5 @@
-from mir.extractors import ExtractorBase
-from mir import io
+from chord_cnn_lstm.mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir import io
 import librosa
 import numpy as np
 

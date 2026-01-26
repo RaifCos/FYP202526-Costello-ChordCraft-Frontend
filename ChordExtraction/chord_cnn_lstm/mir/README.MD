@@ -23,7 +23,7 @@ MIR Helper is a framework for Music Information Retrieval (MIR) data manipulatin
 In the following context, we will use 'mir' to denote the package, and use 'io' to denote its IO manager.
 ```
 import mir
-import mir.io as io
+import chord_cnn_lstm.mir.io as io
 ```
 
 ### Data Management
@@ -141,7 +141,7 @@ class CQTExtractor(mir.extractors.ExtractorBase):
 Another function of the package is to perform PyTorch-related work easier by a network trainer/inference framework.
 
 ```
-import mir.nn
+import chord_cnn_lstm.mir.nn
 ```
 
 #### DataStorage
@@ -226,7 +226,7 @@ class CQTPitchShifter(AbstractPitchShifter):
 
 #### NetworkInterface
 
-NetworkInterface provides a interface for training and testing PyTorch models. To use the class, you first need to define a model structure in a subclass of mir.nn.NetworkBehavior.
+NetworkInterface provides a interface for training and testing PyTorch models. To use the class, you first need to define a model structure in a subclass of chord_cnn_lstm.mir.nn.NetworkBehavior.
 
 You need to complete these functions in your subclass:
 

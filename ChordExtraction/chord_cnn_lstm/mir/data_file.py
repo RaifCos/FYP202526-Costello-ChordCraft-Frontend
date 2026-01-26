@@ -1,5 +1,5 @@
 from abc import ABC,abstractmethod
-from mir.common import SONIC_VISUALIZER_PATH,WORKING_PATH
+from chord_cnn_lstm.mir.common import SONIC_VISUALIZER_PATH,WORKING_PATH
 import subprocess
 import os
 import gc

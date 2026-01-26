@@ -1,8 +1,8 @@
 import datasets
 from io_new.downbeat_io import DownbeatIO
 import numpy as np
-from mir.extractors import ExtractorBase
-from mir import io
+from chord_cnn_lstm.mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir import io
 import librosa
 EPS=1e-8
 

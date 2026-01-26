@@ -1,5 +1,5 @@
 import os
-from mir import DataPool,DataEntry,io
+from chord_cnn_lstm.mir import DataPool,DataEntry,io
 from io_new.jams_io import JamsIO
 from io_new.chordlab_io import ChordLabIO
 from io_new.beatlab_io import BeatLabIO
@@ -12,7 +12,7 @@ from io_new.downbeat_io import DownbeatIO
 from settings import *
 from collections import OrderedDict
 from extractors.jam_converter import JamsToChordLabs
-from mir.extractors.librosa_extractor import HPSS
+from chord_cnn_lstm.mir.extractors.librosa_extractor import HPSS
 
 def set_default_dataset_properties(dataset):
     dataset.set_property('sr', DEFAULT_SR)
@@ -244,11 +244,11 @@ if __name__ == '__main__':
     cb=create_valid_cb_dataset()
     from extractors.cqt import CQTV2
     from extractors.key_preprocess import FramedKey
-    from mir.extractors.misc import FrameCount
+    from chord_cnn_lstm.mir.extractors.misc import FrameCount
     from extractors.madmom_extractor import DBNDownBeatExtractor,DBNDownBeatProbability
     from extractors.beat_preprocess import BeatAnnotationFromBillboard,TonicAnnotationFromBillboard,BasicStructureAnnotationFromBillboard
     from extractors.complex_chord_preprocess import chordlab_to_flat_vocab,get_flat_chord_vocab
-    from mir.extractors.librosa_extractor import HPSS
+    from chord_cnn_lstm.mir.extractors.librosa_extractor import HPSS
     chord_dict=get_flat_chord_vocab('data/submission_chord_list.txt')
 
     cb.append_extractor(DBNDownBeatExtractor,'beat',source='music')

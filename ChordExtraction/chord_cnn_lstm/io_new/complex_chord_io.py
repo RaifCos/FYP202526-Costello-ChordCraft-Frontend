@@ -1,7 +1,7 @@
-from mir.io.feature_io_base import *
+from chord_cnn_lstm.mir.io.feature_io_base import *
 import complex_chord
-from mir.music_base import NUM_TO_ABS_SCALE
-from mir.common import PACKAGE_PATH
+from chord_cnn_lstm.mir.music_base import NUM_TO_ABS_SCALE
+from chord_cnn_lstm.mir.common import PACKAGE_PATH
 import numpy as np
 
 class ComplexChordIO(FeatureIO):

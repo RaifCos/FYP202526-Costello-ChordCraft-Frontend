@@ -1,4 +1,4 @@
-from mir.io import FeatureIO
+from chord_cnn_lstm.mir.io import FeatureIO
 import jams
 
 

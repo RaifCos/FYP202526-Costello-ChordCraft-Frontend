@@ -1,4 +1,4 @@
-from mir.extractors.extractor_base import *
+from chord_cnn_lstm.mir.extractors.extractor_base import *
 import librosa
 import numpy as np
 

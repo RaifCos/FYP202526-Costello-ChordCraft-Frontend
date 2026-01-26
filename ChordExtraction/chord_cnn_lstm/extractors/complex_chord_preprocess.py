@@ -1,9 +1,9 @@
-from mir.extractors import ExtractorBase
-from mir import io
+from chord_cnn_lstm.mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir import io
 from io_new.complex_chord_io import ComplexChordIO
 import numpy as np
 import complex_chord
-from mir.music_base import get_scale_and_suffix
+from chord_cnn_lstm.mir.music_base import get_scale_and_suffix
 
 
 def chordlab_to_complex_chord(entry,chordlab):

@@ -1,5 +1,5 @@
-from mir.extractors import ExtractorBase
-from mir import io
+from chord_cnn_lstm.mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir import io
 from io_new.chordlab_io import ChordLabIO
 import pickle
 import os

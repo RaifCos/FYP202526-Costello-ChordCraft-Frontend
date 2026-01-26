@@ -1,24 +1,24 @@
 from chordnet_ismir_naive import ChordNet,chord_limit,ChordNetCNN
-from mir.nn.train import NetworkInterface
-import mir.io as io
+from chord_cnn_lstm.mir.nn.train import NetworkInterface
+import chord_cnn_lstm.mir.io as io
 import datasets
 from extractors.cqt import CQTV2,SimpleChordToID
-from mir import io,DataEntry
+from chord_cnn_lstm.mir import io,DataEntry
 from io_new.chordlab_io import ChordLabIO
 from extractors.xhmm_ismir import XHMMDecoder
 from complex_chord import Chord,ChordTypeLimit,shift_complex_chord_array_list,complex_chord_chop,enum_to_dict,\
     TriadTypes,SeventhTypes,NinthTypes,EleventhTypes,ThirteenthTypes,create_tag_list
-from mir.music_base import NUM_TO_ABS_SCALE
+from chord_cnn_lstm.mir.music_base import NUM_TO_ABS_SCALE
 from extractors.complex_chord_preprocess import chordlab_to_complex_chord
-from mir import cache
+from chord_cnn_lstm.mir import cache
 import os
 import numpy as np
 from joblib import Parallel,delayed
 from train_eval_test_split import get_test_fold_by_name
-from mir.cache import mkdir_for_file
-from mir.extractors.misc import FrameCount
+from chord_cnn_lstm.mir.cache import mkdir_for_file
+from chord_cnn_lstm.mir.extractors.misc import FrameCount
 from settings import DEFAULT_SR,DEFAULT_HOP_LENGTH
-from mir.data_file import TextureBuilder
+from chord_cnn_lstm.mir.data_file import TextureBuilder
 
 def visualize_dataset(net,dataset,chord_dict_name='ismir2017',music='music'):
     hmm=XHMMDecoder(template_file='data/%s_chord_list.txt'%chord_dict_name)

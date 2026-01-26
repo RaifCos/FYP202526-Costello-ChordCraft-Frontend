@@ -1,7 +1,7 @@
-from mir.extractors import ExtractorBase
-from mir import io
+from chord_cnn_lstm.mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir import io
 import numpy as np
-from mir.music_base import get_scale_and_suffix
+from chord_cnn_lstm.mir.music_base import get_scale_and_suffix
 
 class FramedKey(ExtractorBase):
 

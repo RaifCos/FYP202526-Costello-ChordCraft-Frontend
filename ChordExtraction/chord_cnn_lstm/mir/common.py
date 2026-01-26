@@ -1,5 +1,5 @@
 import os
-from mir.settings import *
+from chord_cnn_lstm.mir.settings import *
 
 WORKING_PATH=os.getcwd()
 PACKAGE_PATH=os.path.dirname(os.path.abspath(__file__))

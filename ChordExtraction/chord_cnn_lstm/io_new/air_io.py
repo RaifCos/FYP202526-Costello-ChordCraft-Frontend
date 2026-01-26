@@ -1,4 +1,4 @@
-from mir.io.feature_io_base import *
+from chord_cnn_lstm.mir.io.feature_io_base import *
 import numpy as np
 import librosa
 
@@ -11,7 +11,7 @@ class AirIO(FeatureIO):
 
     def visualize(self, data, filename, entry, override_sr):
         arr=data.export_to_array()
-        from mir.io.implement.regional_spectrogram_io import RegionalSpectrogramIO
+        from chord_cnn_lstm.mir.io.implement.regional_spectrogram_io import RegionalSpectrogramIO
         return RegionalSpectrogramIO().visualize(arr,filename,entry,override_sr=override_sr)
 
     def get_visualize_extention_name(self):

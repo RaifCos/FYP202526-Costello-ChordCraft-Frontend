@@ -1,13 +1,13 @@
-from mir.nn.train import NetworkInterface
-import mir.io as io
+from chord_cnn_lstm.mir.nn.train import NetworkInterface
+import chord_cnn_lstm.mir.io as io
 import datasets
 from extractors.cqt import CQTV2,SimpleChordToID
-from mir import io,DataEntry
+from chord_cnn_lstm.mir import io,DataEntry
 from io_new.chordlab_io import ChordLabIO
 from extractors.xhmm_decoder import XHMMDecoder,prob_to_spectrogram
 from complex_chord import Chord,ChordTypeLimit,shift_complex_chord_array_list,complex_chord_chop,enum_to_dict,\
     TriadTypes,SeventhTypes,NinthTypes,EleventhTypes,ThirteenthTypes
-from mir.music_base import NUM_TO_ABS_SCALE
+from chord_cnn_lstm.mir.music_base import NUM_TO_ABS_SCALE
 import os
 import mir_eval
 import numpy as np

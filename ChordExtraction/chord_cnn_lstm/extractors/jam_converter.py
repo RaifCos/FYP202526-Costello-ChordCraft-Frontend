@@ -1,6 +1,6 @@
-from mir.extractors import ExtractorBase
+from chord_cnn_lstm.mir.extractors import ExtractorBase
 from io_new.chordlab_io import ChordLabIO
-from mir import io
+from chord_cnn_lstm.mir import io
 import librosa
 import numpy as np
 from extractors.chord_name_fix import fix_mirex_chord_name
