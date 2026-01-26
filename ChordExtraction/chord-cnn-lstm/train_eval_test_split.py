@@ -1,6 +1,8 @@
 import numpy as np
+import os
 
-f=open('data/all_1217.csv','r')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+f=open(f'{current_dir}/data/all_1217.csv','r')
 lines=[line.strip() for line in f.readlines()]
 f.close()
 names={line:i for i,line in enumerate(lines)}
@@ -11,7 +13,7 @@ TEST_IDS=[]
 TEST_FOLD_LOOKUP_TABLE={}
 np.random.seed(20190326)
 for fold in range(5):
-    f=open('data/train%02d.csv'%fold,'r')
+    f=open(f'{current_dir}/data/train%02d.csv'%fold,'r')
     result=[names[line.strip()] for line in f.readlines()]
     result_length=len(result)
     val_set_count=result_length//4
@@ -19,7 +21,7 @@ for fold in range(5):
     result=[result[i] for i in perm]
     TRAIN_IDS.append(result[:-val_set_count])
     VAL_IDS.append(result[-val_set_count:])
-    f=open('data/test%02d.csv'%fold,'r')
+    f=open(f'{current_dir}/data/test%02d.csv'%fold,'r')
     data=[line.strip() for line in f.readlines()]
     TEST_IDS.append([names[i] for i in data])
     for name in data:
