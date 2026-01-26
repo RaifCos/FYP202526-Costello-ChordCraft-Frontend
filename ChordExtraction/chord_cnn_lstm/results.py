@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from complex_chord import ChordTypeLimit,Chord,NUM_TO_ABS_SCALE
+from chord_cnn_lstm.complex_chord import ChordTypeLimit,Chord,NUM_TO_ABS_SCALE
 import mir_eval
 from settings import JAM_DATASET_PATH
 import matplotlib.pyplot as plt

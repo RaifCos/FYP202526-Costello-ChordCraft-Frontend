@@ -3,13 +3,13 @@ from chord_cnn_lstm.mir.common import SONIC_VISUALIZER_PATH,WORKING_PATH
 import subprocess
 import os
 import gc
-import mir.io
+import chord_cnn_lstm.mir.io
 from joblib import Parallel,delayed
 import random
 from pydub.utils import mediainfo
 import time
 import datetime
-import mir.cache
+import chord_cnn_lstm.mir.cache
 
 
 
@@ -128,11 +128,11 @@ class DataEntryProperties():
     def set(self, item, value):
         if('dict' not in self.__dict__):
             raise AttributeError('you are not initialized!')
-        if(isinstance(value,mir.io.LoadingPlaceholder)):
+        if(isinstance(value,chord_cnn_lstm.mir.io.LoadingPlaceholder)):
             # Set a place holder
             if (item not in self.dict):
                 self.dict[item] = value
-        elif(item in self.dict and not isinstance(self.dict[item],mir.io.LoadingPlaceholder)):
+        elif(item in self.dict and not isinstance(self.dict[item],chord_cnn_lstm.mir.io.LoadingPlaceholder)):
             # Old value found
             if(self.dict[item]!=value):
                 print('Warning: Inconsistant property in %s: old value'%item,self.dict[item],'new value',value)
@@ -147,10 +147,10 @@ class DataEntryProperties():
             if(len(self.recorded_set_stack)>0): # Recording
                 self.recorded_set_stack[-1].add(item)
             obj=self.dict[item]
-            if(isinstance(obj,mir.io.LoadingPlaceholder)):
+            if(isinstance(obj,chord_cnn_lstm.mir.io.LoadingPlaceholder)):
                 obj.fire()
                 obj=self.dict[item]
-                assert(not isinstance(obj,mir.io.LoadingPlaceholder))
+                assert(not isinstance(obj,chord_cnn_lstm.mir.io.LoadingPlaceholder))
             return obj
         else:
             raise AttributeError("Property %s not appended!"%item)
@@ -160,10 +160,10 @@ class DataEntryProperties():
             raise AttributeError('you are not initialized!')
         if(item in self.dict):
             obj=self.dict[item]
-            if(isinstance(obj,mir.io.LoadingPlaceholder)):
+            if(isinstance(obj,chord_cnn_lstm.mir.io.LoadingPlaceholder)):
                 obj.fire()
                 obj=self.dict[item]
-                assert(not isinstance(obj,mir.io.LoadingPlaceholder))
+                assert(not isinstance(obj,chord_cnn_lstm.mir.io.LoadingPlaceholder))
             return obj
 
     def start_record_reading(self):

@@ -6,7 +6,7 @@ import os
 import pumpp
 
 from extractors.ismir2017.train_deep import construct_model
-from train_eval_test_split import get_test_fold_by_name
+from chord_cnn_lstm.train_eval_test_split import get_test_fold_by_name
 
 MODEL_PATH=R'extractors\ismir2017\data'
 

@@ -1,8 +1,8 @@
 from chord_cnn_lstm.chordnet_ismir_naive import ChordNet, chord_limit, ChordNetCNN
 from chord_cnn_lstm.mir.nn.train import NetworkInterface
-from extractors.cqt import CQTV2, SimpleChordToID
+from chord_cnn_lstm.extractors.cqt import CQTV2, SimpleChordToID
 from chord_cnn_lstm.mir import io, DataEntry
-from extractors.xhmm_ismir import XHMMDecoder
+from chord_cnn_lstm.extractors.xhmm_ismir import XHMMDecoder
 import numpy as np
 from io_new.chordlab_io import ChordLabIO
 from settings import DEFAULT_SR, DEFAULT_HOP_LENGTH
