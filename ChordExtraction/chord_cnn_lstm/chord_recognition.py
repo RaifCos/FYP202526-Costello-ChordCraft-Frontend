@@ -19,13 +19,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 # Use the same model file names as the original implementation
 MODEL_NAMES = [os.path.join(current_dir, 'cache_data', f'joint_chord_net_ismir_naive_v1.0_reweight(0.0,10.0)_s{i}.best') for i in range(5)]
 
-def chord_recognition(audio_path, output_path, chord_dict_name='submission'):
+def chord_recognition(audio_path, chord_dict_name='submission'):
     """
     Real implementation of chord recognition using the Chord-CNN-LSTM model.
 
     Args:
         audio_path: Path to the audio file
-        output_path: Path to save the output JSON file
         chord_dict_name: Name of the chord dictionary to use
     """
     print(f"Running chord recognition on {audio_path} with chord_dict={chord_dict_name}")
@@ -150,43 +149,12 @@ def chord_recognition(audio_path, output_path, chord_dict_name='submission'):
             "chords": json_chords
         }
 
-        # Write JSON output
-        with open(output_path, "w") as f:
-            json.dump(output_json, f, indent=2)
-
-        print(f"Generated {len(json_chords)} chords and saved to {output_path}")
-
-        # Sanity check: detect non-N chords
-        if not any(chord["label"] != "N" for chord in json_chords):
-            print("WARNING: Only 'N' chords detected.")
-            print("Possible causes:")
-            print("  1. Weak harmonic content in audio")
-            print("  2. Model checkpoint incompatibility")
-            print("  3. Feature extraction issues")
-            print("  4. HMM configuration mismatch")
-
-        return True
+        return output_json
 
     except Exception as e:
         print(f"Error in chord recognition: {e}")
         traceback.print_exc()
-        return False
+        return None
 
-
-
-
-if __name__ == '__main__':
-    if len(sys.argv) == 3:
-        success = chord_recognition(sys.argv[1], sys.argv[2])
-        if not success:
-            print("Chord recognition failed. Please check the error messages above.")
-            sys.exit(1)
-    elif len(sys.argv) == 4:
-        success = chord_recognition(sys.argv[1], sys.argv[2], sys.argv[3])
-        if not success:
-            print("Chord recognition failed. Please check the error messages above.")
-            sys.exit(1)
-    else:
-        print('Usage: chord_recognition.py path_to_audio_file path_to_output_file [chord_dict=submission]')
-        print('\tChord dict can be one of the following: full, ismir2017, submission, extended')
-        sys.exit(0)
+def main(audioPath):
+    return chord_recognition(audioPath, chord_dict_name='submission')
