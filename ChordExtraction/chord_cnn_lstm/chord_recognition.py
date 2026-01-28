@@ -134,7 +134,7 @@ def chord_recognition(audio_path, chord_dict_name='submission'):
             {
                 "start": float(start),
                 "end": float(end),
-                "label": chord
+                "chord": chord
             }
             for start, end, chord in chordlab
         ]
