@@ -1,4 +1,4 @@
-import time, json
+import time
 import librosa
 import chordProcessing
 
@@ -7,13 +7,13 @@ def main(audioPath):
 
     # Load audio file
     y, sr = librosa.load(audioPath, sr=22050)
-    
+
     # Compute Chromagram.
     chromagram = librosa.feature.chroma_cqt(
         y=y,            # Audio.
         sr=sr,          # Audio Sample Rate.
         hop_length=512, # Space between Frames.
-        n_chroma=12     #Pitch Classes.
+        n_chroma=12     # Pitch Classes.
     )
 
     # Load Chord Templates.

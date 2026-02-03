@@ -1,4 +1,4 @@
-import time, json
+import time
 import librosa
 import numpy as np
 import chordProcessing
