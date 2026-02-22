@@ -18,12 +18,17 @@ import com.example.chordcraft.ui.components.getFileName
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 import androidx.compose.material3.Button
 import androidx.compose.runtime.*
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 
 private val ScreenPadding = 32.dp
 
 class MainMenuActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(this))
+        }
         setContent {
             ChordCraftTheme { MainMenuStructure() }
         }
@@ -97,6 +102,9 @@ fun UploadChord(
     val selectedFileUri = remember { mutableStateOf<Uri?>(null) }
     val launchFilePickerCall = filePickerLauncher(selectedFileUri)
 
+    val pythonCall = pythonLauncher()
+    var pythonOutput by remember { mutableStateOf("Python!") }
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -116,6 +124,12 @@ fun UploadChord(
                 text = "Selected: ${getFileName(uri)}",
                 style = MaterialTheme.typography.bodyMedium,
             )
+        }
+
+        Button(onClick = {
+            pythonOutput = pythonCall
+        }) {
+            Text(text = pythonOutput)
         }
     }
 }

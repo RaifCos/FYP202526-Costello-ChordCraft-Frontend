@@ -1,16 +1,21 @@
+import com.android.build.api.dsl.ApplicationExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.chaquo.python")
 }
 
 android {
     namespace = "com.example.chordcraft"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
+        ndk {
+            abiFilters += listOf("arm64-v8a", "x86_64", "x86")
+        }
+
         applicationId = "com.example.chordcraft"
         minSdk = 24
         targetSdk = 36
@@ -20,7 +25,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+            buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -38,6 +43,15 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+chaquopy {
+    defaultConfig {
+        version = "3.11"
+        buildPython("C:\\Users\\School\\AppData\\Local\\Programs\\Python\\Python311\\python.exe")
+        // Optional: pip packages
+        pip { install("numpy") }
     }
 }
 
