@@ -1,9 +1,0 @@
-__pycache__/
-dev-env/
-/temp
-/.idea
-/__pycache__
-*.pyc
-/output
-.qodo
-.ipynb_checkpoints
