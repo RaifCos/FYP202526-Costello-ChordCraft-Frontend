@@ -1,6 +1,6 @@
 import time
-import librosa
 import numpy as np
+import audioLoader
 import chordProcessing
 
 def ShortTimeFourierTransfomrm(y, sr, fftWindowSize=4096, hopLength=512):
@@ -59,7 +59,7 @@ def buildChromagram(stft, sr, fftWindowSize=4096):
 
 def main(audioPath):
     processStart = time.time()
-    y, sr = librosa.load(audioPath, sr=22050)
+    y, sr = audioLoader.loadAudio(audioPath, targetSr=22050)
     
     # Parameters for STFT.
     fftWindowSize = 4096

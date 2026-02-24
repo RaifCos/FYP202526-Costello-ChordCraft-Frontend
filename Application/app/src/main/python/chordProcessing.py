@@ -1,5 +1,4 @@
 import numpy as np
-import librosa
 
 roots = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 _chordNames, _chordTemplates = None, None
@@ -62,7 +61,7 @@ def detectChords(chromagram, hopLength=512, sr=22050):
     bestChords = np.argmax(similarities, axis=0)
     
     # Convert frame indices to time.
-    frameTimes = librosa.frames_to_time(np.arange(frameCount), sr=sr, hop_length=hopLength)
+    frameTimes = np.arange(frameCount) * hopLength / sr
     
     # Group consecutive identical chords
     chords = []
