@@ -2,6 +2,7 @@ package com.example.chordcraft
 
 import android.content.*
 import android.os.Bundle
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.*
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+
 import com.example.chordcraft.ui.components.BorderBar
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
