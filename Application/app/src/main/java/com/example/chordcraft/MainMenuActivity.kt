@@ -2,6 +2,7 @@ package com.example.chordcraft
 
 import android.net.Uri
 import android.os.Bundle
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -12,14 +13,19 @@ import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.chordcraft.ui.components.BorderBar
-import com.example.chordcraft.ui.components.filePickerLauncher
-import com.example.chordcraft.ui.components.getFileName
-import com.example.chordcraft.ui.theme.ChordCraftTheme
 import androidx.compose.material3.Button
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+
+import com.example.chordcraft.components.callPython
+import com.example.chordcraft.ui.components.BorderBar
+import com.example.chordcraft.components.filePickerLauncher
+import com.example.chordcraft.components.getFileName
+import com.example.chordcraft.ui.theme.ChordCraftTheme
+
 
 private val ScreenPadding = 32.dp
 
@@ -99,11 +105,10 @@ fun MainMenu(
 fun UploadChord(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val selectedFileUri = remember { mutableStateOf<Uri?>(null) }
     val launchFilePickerCall = filePickerLauncher(selectedFileUri)
-
-    val pythonCall = pythonLauncher()
-    var pythonOutput by remember { mutableStateOf("Python!") }
+    var pythonOutput by remember { mutableStateOf("Generate Chords!") }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -118,7 +123,7 @@ fun UploadChord(
             text = ".MP3 or .WAV",
             style = MaterialTheme.typography.bodySmall
         )
-        
+
         selectedFileUri.value?.let { uri ->
             Text(
                 text = "Selected: ${getFileName(uri)}",
@@ -127,7 +132,15 @@ fun UploadChord(
         }
 
         Button(onClick = {
-            pythonOutput = pythonCall
+            val uri = selectedFileUri.value
+            if (uri != null) {
+                //  Test Python Call
+                val tempFile = java.io.File(context.cacheDir, "audio_temp.wav")
+                context.contentResolver.openInputStream(uri)?.use { input ->
+                    tempFile.outputStream().use { output -> input.copyTo(output) }
+                }
+                pythonOutput = callPython(tempFile.absolutePath)
+            }
         }) {
             Text(text = pythonOutput)
         }
