@@ -50,8 +50,7 @@ chaquopy {
     defaultConfig {
         version = "3.11"
         buildPython("C:\\Users\\School\\AppData\\Local\\Programs\\Python\\Python311\\python.exe")
-        // Optional: pip packages
-        pip { install("numpy") }
+        pip { install("-r", "requirements.txt") }
     }
 }
 
