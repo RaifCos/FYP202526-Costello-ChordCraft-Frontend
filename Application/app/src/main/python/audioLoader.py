@@ -1,28 +1,49 @@
 import numpy as np
-from math import gcd
+import miniaudio
+import wave
 
+# Use File Signatures to identify the Audio Format of a given file. 
+def getAudioFormat(audioPath):
+    with open(audioPath, 'rb') as f:
+        header = f.read(12)
+    if header[:4] == b'RIFF' and header[8:12] == b'WAVE':
+        return 'wav'
+    elif header[:3] == b'ID3' or header[:2] == b'\xff\xfb' or header[:2] == b'\xff\xf3' or header[:2] == b'\xff\xf2':
+        return 'mp3'
+    else:
+        return 'unknown'
+
+# Load given Audio File for ACR Model. 
 def loadAudio(audioPath, targetSr=22050):
-    # Read WAV manually to avoid any native library dependencies.
-    import wave
-    with wave.open(audioPath, 'rb') as wf:
-        nChannels = wf.getnchannels()
-        sampWidth = wf.getsampwidth()
-        sr = wf.getframerate()
-        rawData = wf.readframes(wf.getnframes())
+    audioFormat = getAudioFormat(audioPath)
 
-    # Decode PCM bytes to float32.
-    if sampWidth == 1:
-        y = (np.frombuffer(rawData, dtype=np.uint8).astype(np.float32) - 128.0) / 128.0
-    elif sampWidth == 2:
-        y = np.frombuffer(rawData, dtype=np.int16).astype(np.float32) / 32768.0
-    elif sampWidth == 4:
-        y = np.frombuffer(rawData, dtype=np.int32).astype(np.float32) / 2147483648.0
+    # Load MP3 Audio using miniaudio.
+    if audioFormat == 'mp3':
+        decoded = miniaudio.mp3_read_file_f32(audioPath)
+        y = np.array(decoded.samples, dtype=np.float32)
+        sr = decoded.sample_rate
+        nChannels = decoded.nchannels
+        if nChannels > 1:
+            y = y.reshape(-1, nChannels).mean(axis=1)
 
-    # Convert stereo to mono.
-    if nChannels > 1:
-        y = y.reshape(-1, nChannels).mean(axis=1)
+    # Load WAV Audio using wave.
+    elif audioFormat == 'wav':
+        with wave.open(audioPath, 'rb') as wf:
+            nChannels = wf.getnchannels()
+            sampWidth = wf.getsampwidth()
+            sr = wf.getframerate()
+            rawData = wf.readframes(wf.getnframes())
+        if sampWidth == 1:
+            y = (np.frombuffer(rawData, dtype=np.uint8).astype(np.float32) - 128.0) / 128.0
+        elif sampWidth == 2:
+            y = np.frombuffer(rawData, dtype=np.int16).astype(np.float32) / 32768.0
+        elif sampWidth == 4:
+            y = np.frombuffer(rawData, dtype=np.int32).astype(np.float32) / 2147483648.0
 
-    # Resample using linear interpolation.
+    else:
+        raise ValueError(f"{audioPath} is not in a supported audio format.")
+
+    # Resample using Linear Interpolation.
     if sr != targetSr:
         originalLength = len(y)
         targetLength = int(originalLength * targetSr / sr)
