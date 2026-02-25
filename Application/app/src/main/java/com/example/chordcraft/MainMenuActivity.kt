@@ -26,7 +26,6 @@ import com.example.chordcraft.components.filePickerLauncher
 import com.example.chordcraft.components.getFileName
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
-
 private val ScreenPadding = 32.dp
 
 class MainMenuActivity : ComponentActivity() {
