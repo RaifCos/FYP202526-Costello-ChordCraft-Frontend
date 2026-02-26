@@ -19,6 +19,10 @@ import androidx.compose.ui.platform.LocalContext
 
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import com.example.chordcraft.components.callAPI
+
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 import com.example.chordcraft.components.callPython
 import com.example.chordcraft.ui.components.BorderBar
@@ -44,6 +48,8 @@ class MainMenuActivity : ComponentActivity() {
 fun MainMenuStructure(
     borderBar: @Composable () -> Unit = { BorderBar() }
 ) {
+    var output by remember { mutableStateOf("Your Chords will appear here.") }  // Lifted up
+
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -56,11 +62,11 @@ fun MainMenuStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             MainMenu(
-            "Main Menu",
-            "Options TBA",
-            modifier = Modifier
-                .padding(ScreenPadding)
-            ) }
+                "Your Chords",
+                output,
+                modifier = Modifier.padding(ScreenPadding)
+            )
+        }
 
         Box(
             modifier = Modifier
@@ -69,9 +75,11 @@ fun MainMenuStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             UploadChord(
-                modifier = Modifier
-                    .padding(ScreenPadding)
-            ) }
+                output = output,
+                onOutputChange = { output = it },
+                modifier = Modifier.padding(ScreenPadding)
+            )
+        }
 
         borderBar()
     }
@@ -102,12 +110,13 @@ fun MainMenu(
 
 @Composable
 fun UploadChord(
+    output: String,
+    onOutputChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val selectedFileUri = remember { mutableStateOf<Uri?>(null) }
     val launchFilePickerCall = filePickerLauncher(selectedFileUri)
-    var pythonOutput by remember { mutableStateOf("Generate Chords!") }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -138,10 +147,22 @@ fun UploadChord(
                 context.contentResolver.openInputStream(uri)?.use { input ->
                     tempFile.outputStream().use { output -> input.copyTo(output) }
                 }
-                pythonOutput = callPython(tempFile.absolutePath)
+                onOutputChange(callPython(tempFile.absolutePath))
             }
         }) {
-            Text(text = pythonOutput)
+            Text("Generate Chords! (Python)")
+        }
+
+        val scope = rememberCoroutineScope()
+        Button(onClick = {
+            val uri = selectedFileUri.value
+            if (uri != null) {
+                scope.launch(Dispatchers.IO) {
+                    onOutputChange(callAPI(context, uri))
+                }
+            }
+        }) {
+            Text("Generate Chords! (API)")
         }
     }
 }
