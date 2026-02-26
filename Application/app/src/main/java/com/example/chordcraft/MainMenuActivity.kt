@@ -62,8 +62,8 @@ fun MainMenuStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             MainMenu(
-                "Main Menu",
-                output,  // Pass shared state here
+                "Your Chords",
+                output,
                 modifier = Modifier.padding(ScreenPadding)
             )
         }
@@ -75,8 +75,8 @@ fun MainMenuStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             UploadChord(
-                output = output,                      // Pass value down
-                onOutputChange = { output = it },     // Pass setter down
+                output = output,
+                onOutputChange = { output = it },
                 modifier = Modifier.padding(ScreenPadding)
             )
         }
