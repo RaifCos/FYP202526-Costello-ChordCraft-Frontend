@@ -28,6 +28,7 @@ import com.example.chordcraft.components.callPython
 import com.example.chordcraft.ui.components.BorderBar
 import com.example.chordcraft.components.filePickerLauncher
 import com.example.chordcraft.components.getFileName
+import com.example.chordcraft.components.cacheFileFromURI
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
@@ -142,11 +143,7 @@ fun UploadChord(
         Button(onClick = {
             val uri = selectedFileUri.value
             if (uri != null) {
-                //  Test Python Call
-                val tempFile = java.io.File(context.cacheDir, "audio_temp.wav")
-                context.contentResolver.openInputStream(uri)?.use { input ->
-                    tempFile.outputStream().use { output -> input.copyTo(output) }
-                }
+                val tempFile = cacheFileFromURI(context, uri, "audio.wav")
                 onOutputChange(callPython(tempFile.absolutePath))
             }
         }) {
