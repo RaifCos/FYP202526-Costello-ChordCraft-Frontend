@@ -49,7 +49,7 @@ class MainMenuActivity : ComponentActivity() {
 fun MainMenuStructure(
     borderBar: @Composable () -> Unit = { BorderBar() }
 ) {
-    var output by remember { mutableStateOf("Your Chords will appear here.") }  // Lifted up
+    var output by remember { mutableStateOf("Your Chords will appear here.") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -76,7 +76,6 @@ fun MainMenuStructure(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             UploadChord(
-                output = output,
                 onOutputChange = { output = it },
                 modifier = Modifier.padding(ScreenPadding)
             )
@@ -111,7 +110,6 @@ fun MainMenu(
 
 @Composable
 fun UploadChord(
-    output: String,
     onOutputChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
