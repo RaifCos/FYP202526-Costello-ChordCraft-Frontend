@@ -20,17 +20,17 @@ import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
 
-class MainActivity : ComponentActivity() {
+class OpeningActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChordCraftTheme { MainStructure() }
+            ChordCraftTheme { OpeningStructure() }
         }
     }
 }
 
 @Composable
-fun MainStructure(
+fun OpeningStructure(
     borderBar: @Composable () -> Unit = { BorderBar() }
 ) {
     Column(
@@ -97,6 +97,6 @@ fun Opening(
     showSystemUi = true
 )
 @Composable
-fun MainPreview() {
-    MainStructure()
+fun OpeningPreview() {
+    OpeningStructure()
 }
