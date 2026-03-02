@@ -1,15 +1,10 @@
 package com.example.chordcraft.components
 import com.chaquo.python.Python
+import org.json.JSONObject
 
-fun callPython(module: String) {
-    val python = Python.getInstance()
-    val module = python.getModule(module)
-    module.callAttr("main")
-}
-
-fun callPythonReturn(module: String, parameterValue: String): String {
+fun callPythonReturn(module: String, parameterValue: String): JSONObject {
     val python = Python.getInstance()
     val module = python.getModule(module)
     val result = module.callAttr("main", parameterValue).toString()
-    return result
+    return JSONObject(result)
 }
