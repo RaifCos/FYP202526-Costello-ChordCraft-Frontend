@@ -25,10 +25,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 import com.example.chordcraft.components.callPythonReturn
-import com.example.chordcraft.ui.components.BorderBar
+import com.example.chordcraft.ui.BorderBar
 import com.example.chordcraft.components.filePickerLauncher
 import com.example.chordcraft.components.getFileName
 import com.example.chordcraft.components.cacheFileFromURI
+import com.example.chordcraft.ui.NavMenu
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
@@ -47,7 +48,8 @@ class ChordExtractionActivity : ComponentActivity() {
 
 @Composable
 fun ChordExtractionStructure(
-    borderBar: @Composable () -> Unit = { BorderBar() }
+    borderBar: @Composable () -> Unit = { BorderBar() },
+    navMenu: @Composable () -> Unit = { NavMenu() }
 ) {
     var output by remember { mutableStateOf("Your Chords will appear here.") }
 
@@ -81,6 +83,7 @@ fun ChordExtractionStructure(
             )
         }
 
+        navMenu()
         borderBar()
     }
 }

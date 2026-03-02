@@ -15,7 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.*
 import com.example.chordcraft.components.callPython
 
-import com.example.chordcraft.ui.components.BorderBar
+import com.example.chordcraft.ui.BorderBar
+import com.example.chordcraft.ui.NavMenu
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
@@ -31,7 +32,8 @@ class ChordPlayingActivity : ComponentActivity() {
 
 @Composable
 fun ChordPlayingStructure(
-    borderBar: @Composable () -> Unit = { BorderBar() }
+    borderBar: @Composable () -> Unit = { BorderBar() },
+    navMenu: @Composable () -> Unit = { NavMenu() }
 ) {
     var output by remember { mutableStateOf("Your Chords will appear here.") }
     Column(
@@ -41,9 +43,10 @@ fun ChordPlayingStructure(
 
         Box(
             modifier = Modifier
-                .weight(1f)
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
+                .weight(1f)
+                .background(MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
         ) {
             Menu(
                 "Your Chords",
@@ -54,15 +57,17 @@ fun ChordPlayingStructure(
 
         Box(
             modifier = Modifier
-                .weight(1f)
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
+                .weight(1f)
+                .background(MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
         ) {
             Button({ callPython("chordPlayback") }) {
-                Text(text = "Upload Audio")
+                Text(text = "Play Audio")
             }
         }
 
+        navMenu()
         borderBar()
     }
 }
