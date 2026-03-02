@@ -1,9 +1,6 @@
 package com.example.chordcraft
 
-import android.app.Activity
-import android.content.*
 import android.os.Bundle
-
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -17,7 +14,8 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 
-import com.example.chordcraft.ui.components.BorderBar
+import com.example.chordcraft.ui.BorderBar
+import com.example.chordcraft.ui.moveActivity
 import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
@@ -101,10 +99,4 @@ fun Opening(
 @Composable
 fun MainPreview() {
     MainStructure()
-}
-
-// TODO: Move to Component File.
-fun moveActivity(context: Context, target: Class<out Activity>) {
-    val intent = Intent(context, target)
-    context.startActivity(intent)
 }
