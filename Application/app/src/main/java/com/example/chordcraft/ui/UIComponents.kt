@@ -30,7 +30,7 @@ fun BorderBar(
 }
 
 @Composable
-fun 3Menu () {
+fun Menu () {
     val currContext = LocalContext.current
     Box(
         modifier = Modifier
