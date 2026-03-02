@@ -24,7 +24,7 @@ import com.example.chordcraft.components.callAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-import com.example.chordcraft.components.callPython
+import com.example.chordcraft.components.callPythonReturn
 import com.example.chordcraft.ui.components.BorderBar
 import com.example.chordcraft.components.filePickerLauncher
 import com.example.chordcraft.components.getFileName
@@ -33,20 +33,20 @@ import com.example.chordcraft.ui.theme.ChordCraftTheme
 
 private val ScreenPadding = 32.dp
 
-class MainMenuActivity : ComponentActivity() {
+class ChordExtractionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }
         setContent {
-            ChordCraftTheme { MainMenuStructure() }
+            ChordCraftTheme { ChordExtractionStructure() }
         }
     }
 }
 
 @Composable
-fun MainMenuStructure(
+fun ChordExtractionStructure(
     borderBar: @Composable () -> Unit = { BorderBar() }
 ) {
     var output by remember { mutableStateOf("Your Chords will appear here.") }
@@ -62,7 +62,7 @@ fun MainMenuStructure(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            MainMenu(
+            ChordExtraction(
                 "Your Chords",
                 output,
                 modifier = Modifier.padding(ScreenPadding)
@@ -86,7 +86,7 @@ fun MainMenuStructure(
 }
 
 @Composable
-fun MainMenu(
+fun ChordExtraction(
     txtA: String,
     txtB: String,
     modifier: Modifier = Modifier
@@ -142,7 +142,7 @@ fun UploadChord(
             val uri = selectedFileUri.value
             if (uri != null) {
                 val tempFile = cacheFileFromURI(context, uri, "audio.wav")
-                onOutputChange(callPython(tempFile.absolutePath))
+                onOutputChange(callPythonReturn("modelCustom", tempFile.absolutePath))
             }
         }) {
             Text("Generate Chords! (Python)")
@@ -167,6 +167,6 @@ fun UploadChord(
     showSystemUi = true
 )
 @Composable
-fun MainMenuPreview() {
-    MainMenuStructure()
+fun ChordExtractionPreview() {
+    ChordExtractionStructure()
 }
