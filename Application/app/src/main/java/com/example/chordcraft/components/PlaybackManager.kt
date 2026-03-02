@@ -9,8 +9,9 @@ fun playbackAudio(context: Context) {
         .setMaxStreams(8)
         .build()
 
-    soundPool.load(context.assets.openFd("soundbank/C4.wav"), 1)
-    soundPool.load(context.assets.openFd("soundbank/A4.wav"), 1)
+    soundPool.load(context.assets.openFd("soundbank/00_C4.wav"), 1)
+    soundPool.load(context.assets.openFd("soundbank/04_E4.wav"), 1)
+    soundPool.load(context.assets.openFd("soundbank/07_G4.wav"), 1)
     soundPool.setOnLoadCompleteListener { pool, sampleId, status ->
         if (status == 0) {
             pool.play(sampleId, 1f, 1f, 0, 0, 1f)
