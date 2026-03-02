@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
-
 import com.example.chordcraft.ChordExtractionActivity
 import com.example.chordcraft.ChordPlayingActivity
 
@@ -30,7 +29,7 @@ fun BorderBar(
 }
 
 @Composable
-fun Menu () {
+fun NavMenu () {
     val currContext = LocalContext.current
     Box(
         modifier = Modifier
