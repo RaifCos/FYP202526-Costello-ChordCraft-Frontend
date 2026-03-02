@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.*
+import com.example.chordcraft.components.callPython
 
 import com.example.chordcraft.ui.components.BorderBar
 import com.example.chordcraft.ui.theme.ChordCraftTheme
@@ -57,11 +58,9 @@ fun ChordPlayingStructure(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            Menu(
-                "Chord Player",
-                "Press to Play",
-                modifier = Modifier.padding(ScreenPadding)
-            )
+            Button({ callPython("chordPlayback") }) {
+                Text(text = "Upload Audio")
+            }
         }
 
         borderBar()

@@ -1,19 +1,15 @@
 package com.example.chordcraft.components
-
-import androidx.compose.runtime.Composable
 import com.chaquo.python.Python
 
-@Composable
-fun callPython(): String {
+fun callPython(module: String) {
     val python = Python.getInstance()
-    val module = python.getModule("test")
-    val result = module.callAttr("main").toString()
-    return result
+    val module = python.getModule(module)
+    module.callAttr("main")
 }
 
-fun callPython(parameterValue: String): String {
+fun callPythonReturn(module: String, parameterValue: String): String {
     val python = Python.getInstance()
-    val module = python.getModule("modelCustom")
+    val module = python.getModule(module)
     val result = module.callAttr("main", parameterValue).toString()
     return result
 }
