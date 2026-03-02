@@ -6,12 +6,16 @@ import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PlayArrow
 
 import com.example.chordcraft.ChordExtractionActivity
 import com.example.chordcraft.ChordPlayingActivity
@@ -31,6 +35,7 @@ fun BorderBar(
 @Composable
 fun NavMenu () {
     val currContext = LocalContext.current
+    val iconSet = Icons.Default
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,8 +46,18 @@ fun NavMenu () {
         Row (
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Button( { moveActivity(currContext, ChordExtractionActivity::class.java) } ) { }
-            Button( { moveActivity(currContext, ChordPlayingActivity::class.java) } ) { }
+            Button( { moveActivity(currContext, ChordExtractionActivity::class.java) } )
+            { ->
+                Icon(
+                imageVector = iconSet.Home,
+                contentDescription = "Chord Extraction"
+            ) }
+
+            Button( { moveActivity(currContext, ChordPlayingActivity::class.java) } )
+            { Icon(
+                imageVector = iconSet.PlayArrow,
+                contentDescription = "Chord PLayback"
+            ) }
         }
     }
 }
