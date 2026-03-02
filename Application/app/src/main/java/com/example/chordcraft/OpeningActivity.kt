@@ -1,5 +1,6 @@
 package com.example.chordcraft
 
+import android.app.Activity
 import android.content.*
 import android.os.Bundle
 
@@ -48,7 +49,7 @@ fun MainStructure(
         Opening(
             "Welcome to ChordCraft!",
             "Chord extraction made easy.",
-            onStartClick = { moveMenu(currContext) },
+            onStartClick = { moveActivity(currContext, ChordExtractionActivity::class.java) },
             modifier = Modifier
                 .padding(ScreenPadding)
         ) }
@@ -102,7 +103,8 @@ fun MainPreview() {
     MainStructure()
 }
 
-fun moveMenu(context: Context) {
-    val intent = Intent(context, MainMenuActivity::class.java)
+// TODO: Move to Component File.
+fun moveActivity(context: Context, target: Class<out Activity>) {
+    val intent = Intent(context, target)
     context.startActivity(intent)
 }

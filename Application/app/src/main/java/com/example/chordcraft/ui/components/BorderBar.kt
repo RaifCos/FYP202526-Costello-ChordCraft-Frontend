@@ -2,6 +2,7 @@ package com.example.chordcraft.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,4 +18,17 @@ fun BorderBar(
             .height(56.dp)
             .background(MaterialTheme.colorScheme.primary)
     )
+}
+
+@Composable
+fun NavMenu (
+    modifier: Modifier = Modifier
+) {
+    /*
+    TODO: Add Navigation Functionality between ChordExtraction and ChordPlaying Activities.
+    Column {
+        Button() { }
+        Button() { }
+    }
+    */
 }
